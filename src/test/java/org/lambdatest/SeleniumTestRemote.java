@@ -21,7 +21,7 @@ public class SeleniumTestRemote {
     public void setUp() {
         try {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
-            driver = new RemoteWebDriver(new URL("http://localhost:4444"), firefoxOptions);
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxOptions);
             driver.get("https://lambdatest.github.io/sample-todo-app/");
         } catch (MalformedURLException e) {
             e.printStackTrace();
