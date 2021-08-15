@@ -10,4 +10,9 @@ blocks:
       jobs:
         - name: Run tests
           commands:
+            - checkout
             - mvn clean install -DsuiteXmlFile=testng.xml
+      epilogue:
+        always:
+          commands:
+            - test-results publish target/surefire-reports/junitreports/TEST-org.lambdatest.SeleniumTest.xml
