@@ -15,4 +15,4 @@ blocks:
       epilogue:
         always:
           commands:
-            - test-results publish target/surefire-reports/testng-results.xml
+            - test-results publish target/surefire-reports/junitreports/TEST-org.lambdatest.SeleniumTest.xml
