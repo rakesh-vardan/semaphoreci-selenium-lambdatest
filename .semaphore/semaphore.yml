@@ -16,3 +16,5 @@ blocks:
         always:
           commands:
             - test-results publish target/surefire-reports/junitreports/TEST-org.lambdatest.SeleniumTest.xml
+      secrets:
+        - name: LT
