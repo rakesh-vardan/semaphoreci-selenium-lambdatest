@@ -12,3 +12,7 @@ blocks:
           commands:
             - checkout
             - mvn clean install -DsuiteXmlFile=testng.xml
+      epilogue:
+        always:
+          commands:
+            - test-results publish target/surefire-reports/testng-results.xml
