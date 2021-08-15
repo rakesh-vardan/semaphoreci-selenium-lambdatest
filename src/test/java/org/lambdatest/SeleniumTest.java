@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -15,21 +16,26 @@ public class SeleniumTest {
     public void setUp() {
         WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();
+        driver.get("https://lambdatest.github.io/sample-todo-app/");
     }
 
     @Test
     public void testScript() {
         try {
-            driver.get("https://lambdatest.github.io/sample-todo-app/");
             driver.findElement(By.name("li1")).click();
             driver.findElement(By.name("li2")).click();
             driver.findElement(By.id("sampletodotext")).clear();
             driver.findElement(By.id("sampletodotext")).sendKeys("Yey, Let's add it to list");
             driver.findElement(By.id("addbutton")).click();
-            driver.quit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @Test
+    public void testMe() {
+        String headerText = driver.findElement(By.xpath("//h2")).getText();
+        Assert.assertEquals(headerText, "some test");
     }
 
     @AfterTest
