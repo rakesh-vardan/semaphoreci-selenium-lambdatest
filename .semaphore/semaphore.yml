@@ -10,4 +10,5 @@ blocks:
       jobs:
         - name: Run tests
           commands:
-            - checkout - mvn clean install -DsuiteXmlFile=testng.xml
+            - checkout
+            - mvn clean install -DsuiteXmlFile=testng.xml
