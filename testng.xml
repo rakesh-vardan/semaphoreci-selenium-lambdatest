@@ -4,9 +4,6 @@
     <test verbose="2" name="semaphoreci-selenium-lambdatest">
         <classes>
             <class name="org.lambdatest.SeleniumTest">
-                <methods>
-                    <include name="testScript"/>
-                </methods>
             </class>
         </classes>
     </test>
