@@ -39,7 +39,6 @@ blocks:
             - test-results publish target/surefire-reports/junitreports/TEST-org.lambdatest.SeleniumTest.xml
       secrets:
         - name: LT
-    dependencies: []
   - name: Chrome tests
     task:
       env_vars:
@@ -62,4 +61,3 @@ blocks:
             - test-results publish target/surefire-reports/junitreports/TEST-org.lambdatest.SeleniumTest.xml
       secrets:
         - name: LT
-    dependencies: []
