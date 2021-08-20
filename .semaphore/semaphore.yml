@@ -7,10 +7,10 @@ agent:
 blocks:
   - name: Build project and cache dependencies
     task:
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
       jobs: []
-    env_vars:
-      - name: MAVEN_OPTS
-        value: '-Dmaven.repo.local=.m2'
     jobs:
       - name: Build
         commands:
