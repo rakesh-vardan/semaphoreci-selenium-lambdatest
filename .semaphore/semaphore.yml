@@ -23,7 +23,8 @@ blocks:
         - name: MAVEN_OPTS
           value: '-Dmaven.repo.local=.m2'
       commands:
-        - checkout - cache restore
+        - checkout
+        - cache restore
       jobs:
         - name: Run tests
           commands:
@@ -40,11 +41,18 @@ blocks:
     dependencies: []
   - name: Chrome tests
     task:
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
+      commands:
+        - checkout
+        - cache restore
       jobs:
         - name: Run tests
           commands:
             - 'docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:4.0.0-rc-1-prerelease-20210618'
             - docker ps
+            - cd semaphoreci-selenium-lambdatest
             - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=GRID_CHROME
       epilogue:
         always:
