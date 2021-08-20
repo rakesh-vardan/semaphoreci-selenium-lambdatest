@@ -22,9 +22,10 @@ blocks:
       env_vars:
         - name: MAVEN_OPTS
           value: '-Dmaven.repo.local=.m2'
-      commands:
-        - checkout
-        - cache restore
+      prologue:
+        commands:
+          - checkout
+          - cache restore
       jobs:
         - name: Run tests
           commands:
@@ -44,9 +45,10 @@ blocks:
       env_vars:
         - name: MAVEN_OPTS
           value: '-Dmaven.repo.local=.m2'
-      commands:
-        - checkout
-        - cache restore
+      prologue:
+        commands:
+          - checkout
+          - cache restore
       jobs:
         - name: Run tests
           commands:
