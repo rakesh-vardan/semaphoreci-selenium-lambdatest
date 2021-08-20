@@ -6,6 +6,7 @@ agent:
     os_image: ubuntu1804
 blocks:
   - name: Build
+    dependencies: []
     task:
       env_vars:
         - name: MAVEN_OPTS
@@ -17,6 +18,7 @@ blocks:
             - mvn -q package -DskipTests=true
             - cache store
   - name: API Smoke tests
+    dependencies: []
     task:
       env_vars:
         - name: MAVEN_OPTS
@@ -34,6 +36,8 @@ blocks:
           commands:
             - test-results publish target/surefire-reports/junitreports/*.xml
   - name: Firefox tests
+    dependencies:
+      - API Smoke tests
     task:
       env_vars:
         - name: MAVEN_OPTS
@@ -51,6 +55,8 @@ blocks:
           commands:
             - test-results publish target/surefire-reports/junitreports/*.xml
   - name: Chrome tests
+    dependencies:
+      - API Smoke tests
     task:
       env_vars:
         - name: MAVEN_OPTS
