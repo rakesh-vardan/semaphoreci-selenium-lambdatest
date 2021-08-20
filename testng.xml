@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <test verbose="2" name="chrome tests">
-        <parameter name="browser" value="GRID_FIREFOX"/>
+        <parameter name="browser" value="LOCAL_FIREFOX"/>
         <parameter name="gridHubURL" value="http://localhost:4444/wd/hub"/>
         <classes>
             <class name="org.lambdatest.FirstTest"/>
