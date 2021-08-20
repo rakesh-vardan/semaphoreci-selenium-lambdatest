@@ -31,7 +31,7 @@ public class BrowserFactory {
                 driver = new FirefoxDriver();
                 break;
             case LOCAL_EDGE:
-                WebDriverManager.edgedriver().setup();
+                WebDriverManager.edgedriver().driverVersion("92.0.902.73").setup();
                 driver = new EdgeDriver();
                 break;
             case GRID_CHROME:
