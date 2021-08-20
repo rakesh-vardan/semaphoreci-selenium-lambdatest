@@ -1,15 +1,20 @@
 version: v1.0
-name: First Pipeline in Semaphore
+name: First Pipeline with semaphore
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Selenium Test Execution
+  - name: Tests in Chrome
     task:
-      env_vars: []
+      prologue:
+        commands:
+          - checkout
       jobs:
-        - name: Run Selenium UI tests in Firefox browser
+        - name: Run tests
           commands:
-            - checkout
-            - mvn clean install -DsuiteXmlFile=testng.xml
+            - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_CHROME
+      epilogue:
+        always:
+          commands:
+            - test-results publish target/surefire-reports/junitreports/*.xml
