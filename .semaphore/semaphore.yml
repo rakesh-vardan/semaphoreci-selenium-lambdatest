@@ -7,12 +7,16 @@ agent:
 blocks:
   - name: Build project and cache dependencies
     task:
-      jobs:
-        - name: Build
-          commands:
-            - checkout
-            - mvn -q package -DskipTests=true
-            - cache store
+      jobs: []
+    env_vars:
+      - name: MAVEN_OPTS
+        value: '-Dmaven.repo.local=.m2'
+    jobs:
+      - name: Build
+        commands:
+          - checkout
+          - mvn -q package -DskipTests=true
+          - cache store
   - name: Firefox tests
     task:
       prologue:
@@ -29,7 +33,9 @@ blocks:
             - test-results publish target/surefire-reports/junitreports/*.xml
   - name: Chrome tests
     task:
-      env_vars: null
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
       prologue:
         commands:
           - checkout
@@ -44,6 +50,9 @@ blocks:
             - test-results publish target/surefire-reports/junitreports/*.xml
   - name: IE tests
     task:
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
       prologue:
         commands:
           - checkout
@@ -58,6 +67,9 @@ blocks:
             - test-results publish target/surefire-reports/junitreports/*.xml
   - name: Opera tests
     task:
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
       prologue:
         commands:
           - checkout
