@@ -18,7 +18,8 @@ blocks:
             - mvn -q package -DskipTests=true
             - cache store
   - name: API Smoke tests
-    dependencies: []
+    dependencies:
+      - Build
     task:
       env_vars:
         - name: MAVEN_OPTS
