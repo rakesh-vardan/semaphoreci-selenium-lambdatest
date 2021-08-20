@@ -50,23 +50,6 @@ blocks:
         always:
           commands:
             - test-results publish target/surefire-reports/junitreports/*.xml
-  - name: IE tests
-    task:
-      env_vars:
-        - name: MAVEN_OPTS
-          value: '-Dmaven.repo.local=.m2'
-      prologue:
-        commands:
-          - checkout
-          - cache restore
-      jobs:
-        - name: Run tests in IE
-          commands:
-            - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_IE
-      epilogue:
-        always:
-          commands:
-            - test-results publish target/surefire-reports/junitreports/*.xml
   - name: Opera tests
     task:
       env_vars:
