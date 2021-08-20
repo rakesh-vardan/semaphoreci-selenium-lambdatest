@@ -1,6 +1,7 @@
 package org.lambdatest;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.config.OperatingSystem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -31,7 +32,7 @@ public class BrowserFactory {
                 driver = new FirefoxDriver();
                 break;
             case LOCAL_EDGE:
-                WebDriverManager.edgedriver().driverVersion("92.0.902.73").setup();
+                WebDriverManager.edgedriver().operatingSystem(OperatingSystem.LINUX).setup();
                 driver = new EdgeDriver();
                 break;
             case GRID_CHROME:
