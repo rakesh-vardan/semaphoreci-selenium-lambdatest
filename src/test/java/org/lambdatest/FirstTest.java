@@ -10,7 +10,7 @@ public class FirstTest extends BaseTest {
     public void GitHubTitleTest() {
         Reporter.log(String.format("GitHub Test Started on thread %s", Thread.currentThread().getId()), true);
         getDriver().navigate().to("https://github.com/");
-        Assert.assertEquals(getDriver().getTitle(), "GitHub: Where the world builds software");
+        Assert.assertEquals(getDriver().getTitle(), "GitHub: Where the world builds software · GitHub");
         Reporter.log(String.format("GitHub Test Ended on thread %s", Thread.currentThread().getId()), true);
     }
 
