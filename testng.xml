@@ -5,8 +5,7 @@
         <parameter name="browser" value="chrome"/>
         <parameter name="gridHubURL" value="http://localhost:4444/wd/hub"/>
         <classes>
-            <class name="org.lambdatest.FirstTest"/>
-            <class name="org.lambdatest.SecondTest"/>
+            <class name="org.lambdatest.SeleniumTestRemote"/>
         </classes>
     </test>
 </suite>
