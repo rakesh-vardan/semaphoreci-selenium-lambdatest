@@ -11,6 +11,7 @@ blocks:
         - name: Get the code
           commands:
             - checkout
+    dependencies: []
   - name: Firefox tests
     task:
       jobs:
@@ -25,6 +26,8 @@ blocks:
             - test-results publish target/surefire-reports/junitreports/TEST-org.lambdatest.SeleniumTest.xml
       secrets:
         - name: LT
+    dependencies:
+      - Checkout the code
   - name: Chrome tests
     task:
       jobs:
@@ -39,3 +42,5 @@ blocks:
             - test-results publish target/surefire-reports/junitreports/TEST-org.lambdatest.SeleniumTest.xml
       secrets:
         - name: LT
+    dependencies:
+      - Checkout the code
