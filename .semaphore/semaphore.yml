@@ -29,7 +29,7 @@ blocks:
             - test-results publish target/surefire-reports/junitreports/*.xml
   - name: Chrome tests
     task:
-      env_vars:
+      env_vars: null
       prologue:
         commands:
           - checkout
@@ -56,18 +56,17 @@ blocks:
         always:
           commands:
             - test-results publish target/surefire-reports/junitreports/*.xml
-
   - name: Opera tests
-      task:
-        prologue:
+    task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+      jobs:
+        - name: Run tests in Opera browser
           commands:
-            - checkout
-            - cache restore
-        jobs:
-          - name: Run tests in Opera browser
-            commands:
-              - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_OPERA
-        epilogue:
-          always:
-            commands:
-              - test-results publish target/surefire-reports/junitreports/*.xml
+            - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_OPERA
+      epilogue:
+        always:
+          commands:
+            - test-results publish target/surefire-reports/junitreports/*.xml
