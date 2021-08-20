@@ -3,6 +3,7 @@ package org.lambdatest;
 public enum BrowserType {
     LOCAL_CHROME,
     LOCAL_FIREFOX,
+    LOCAL_EDGE,
     LOCAL_IE,
     GRID_CHROME,
     GRID_FIREFOX,

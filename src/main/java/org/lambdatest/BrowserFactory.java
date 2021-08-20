@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
@@ -28,6 +29,10 @@ public class BrowserFactory {
             case LOCAL_FIREFOX:
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
+                break;
+            case LOCAL_EDGE:
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver();
                 break;
             case GRID_CHROME:
                 ChromeOptions chromeOptions = new ChromeOptions();
