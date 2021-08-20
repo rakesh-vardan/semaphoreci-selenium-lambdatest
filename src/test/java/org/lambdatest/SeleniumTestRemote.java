@@ -2,7 +2,6 @@ package org.lambdatest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -21,8 +20,8 @@ public class SeleniumTestRemote {
     @BeforeTest
     public void setUp() {
         try {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxOptions);
             driver.get("https://lambdatest.github.io/sample-todo-app/");
         } catch (MalformedURLException e) {
             e.printStackTrace();

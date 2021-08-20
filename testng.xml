@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test verbose="2" name="chrome tests">
-        <parameter name="browser" value="chrome"/>
-        <parameter name="gridHubURL" value="http://localhost:4444/wd/hub"/>
+    <test verbose="2" name="firefox tests">
         <classes>
             <class name="org.lambdatest.SeleniumTestRemote"/>
         </classes>
