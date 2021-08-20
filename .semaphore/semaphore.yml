@@ -5,15 +5,25 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Checkout the code
+  - name: Build
     task:
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
       jobs:
-        - name: Get the code
+        - name: Build
           commands:
             - checkout
-    dependencies: []
+            - cache restore
+            - mvn -q package -DskipTests=true
+            - cache store
   - name: Firefox tests
     task:
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
+      commands:
+        - checkout - cache restore
       jobs:
         - name: Run tests
           commands:
@@ -27,8 +37,7 @@ blocks:
             - test-results publish target/surefire-reports/junitreports/TEST-org.lambdatest.SeleniumTest.xml
       secrets:
         - name: LT
-    dependencies:
-      - Checkout the code
+    dependencies: []
   - name: Chrome tests
     task:
       jobs:
@@ -43,5 +52,4 @@ blocks:
             - test-results publish target/surefire-reports/junitreports/TEST-org.lambdatest.SeleniumTest.xml
       secrets:
         - name: LT
-    dependencies:
-      - Checkout the code
+    dependencies: []
