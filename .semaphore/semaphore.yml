@@ -51,3 +51,20 @@ blocks:
         always:
           commands:
             - test-results publish target/surefire-reports/junitreports/*.xml
+  - name: Edge tests
+    task:
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+      jobs:
+        - name: Run tests in edge browser
+          commands:
+            - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_EDGE
+      epilogue:
+        always:
+          commands:
+            - test-results publish target/surefire-reports/junitreports/*.xml
