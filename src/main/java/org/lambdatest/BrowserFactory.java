@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -31,9 +33,13 @@ public class BrowserFactory {
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
                 break;
-            case LOCAL_EDGE:
-                WebDriverManager.edgedriver().operatingSystem(OperatingSystem.LINUX).setup();
-                driver = new EdgeDriver();
+            case LOCAL_OPERA:
+                WebDriverManager.operadriver().setup();
+                driver = new OperaDriver();
+                break;
+            case LOCAL_IE:
+                WebDriverManager.iedriver().setup();
+                driver = new InternetExplorerDriver();
                 break;
             case GRID_CHROME:
                 ChromeOptions chromeOptions = new ChromeOptions();

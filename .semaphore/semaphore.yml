@@ -7,21 +7,14 @@ agent:
 blocks:
   - name: Build project and cache dependencies
     task:
-      env_vars:
-        - name: MAVEN_OPTS
-          value: '-Dmaven.repo.local=.m2'
       jobs:
         - name: Build
           commands:
             - checkout
-            - cache restore
             - mvn -q package -DskipTests=true
             - cache store
   - name: Firefox tests
     task:
-      env_vars:
-        - name: MAVEN_OPTS
-          value: '-Dmaven.repo.local=.m2'
       prologue:
         commands:
           - checkout
@@ -37,8 +30,6 @@ blocks:
   - name: Chrome tests
     task:
       env_vars:
-        - name: MAVEN_OPTS
-          value: '-Dmaven.repo.local=.m2'
       prologue:
         commands:
           - checkout
@@ -51,20 +42,32 @@ blocks:
         always:
           commands:
             - test-results publish target/surefire-reports/junitreports/*.xml
-  - name: Edge tests
+  - name: IE tests
     task:
-      env_vars:
-        - name: MAVEN_OPTS
-          value: '-Dmaven.repo.local=.m2'
       prologue:
         commands:
           - checkout
           - cache restore
       jobs:
-        - name: Run tests in edge browser
+        - name: Run tests in IE browser
           commands:
-            - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_EDGE
+            - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_IE
       epilogue:
         always:
           commands:
             - test-results publish target/surefire-reports/junitreports/*.xml
+
+  - name: Opera tests
+      task:
+        prologue:
+          commands:
+            - checkout
+            - cache restore
+        jobs:
+          - name: Run tests in Opera browser
+            commands:
+              - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_OPERA
+        epilogue:
+          always:
+            commands:
+              - test-results publish target/surefire-reports/junitreports/*.xml
