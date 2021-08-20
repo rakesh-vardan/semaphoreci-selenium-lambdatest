@@ -7,17 +7,17 @@ import org.testng.annotations.Test;
 public class FirstTest extends BaseTest {
 
     @Test
-    public void FacebookTitleTest() {
-        Reporter.log(String.format("Facebook Test Started on thread %s", Thread.currentThread().getId()), true);
-        getDriver().navigate().to("http://www.facebook.com");
-        Assert.assertEquals(getDriver().getTitle(), "Facebook – log in or sign up");
-        Reporter.log(String.format("Facebook Test Ended on thread %s", Thread.currentThread().getId()), true);
+    public void GitHubTitleTest() {
+        Reporter.log(String.format("GitHub Test Started on thread %s", Thread.currentThread().getId()), true);
+        getDriver().navigate().to("https://github.com/");
+        Assert.assertEquals(getDriver().getTitle(), "GitHub");
+        Reporter.log(String.format("GitHub Test Ended on thread %s", Thread.currentThread().getId()), true);
     }
 
     @Test
     public void GmailTitleTest() {
         Reporter.log(String.format("Gmail Test Started on thread %s", Thread.currentThread().getId()), true);
-        getDriver().navigate().to("http://www.gmail.com");
+        getDriver().navigate().to("https://www.gmail.com/");
         Assert.assertEquals(getDriver().getTitle(), "Gmail");
         Reporter.log(String.format("Gmail Test Ended on thread %s", Thread.currentThread().getId()), true);
     }
