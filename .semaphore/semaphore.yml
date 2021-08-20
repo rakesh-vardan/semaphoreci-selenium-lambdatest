@@ -1,17 +1,50 @@
 version: v1.0
-name: First Pipeline with semaphore
+name: Complex pipeline with tests on multiple browsers
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Tests in Chrome
+  - name: Build project and cache dependencies
     task:
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
+      jobs:
+        - name: Build
+          commands:
+            - checkout
+            - cache restore
+            - mvn -q package -DskipTests=true
+            - cache store
+  - name: Firefox tests
+    task:
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
       prologue:
         commands:
           - checkout
+          - cache restore
       jobs:
-        - name: Run tests
+        - name: Run tests in firefox browser
+          commands:
+            - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_FIREFOX
+      epilogue:
+        always:
+          commands:
+            - test-results publish target/surefire-reports/junitreports/*.xml
+  - name: Chrome tests
+    task:
+      env_vars:
+        - name: MAVEN_OPTS
+          value: '-Dmaven.repo.local=.m2'
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+      jobs:
+        - name: Run tests in chrome browser
           commands:
             - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_CHROME
       epilogue:
