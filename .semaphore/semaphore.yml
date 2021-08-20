@@ -31,7 +31,6 @@ blocks:
           commands:
             - 'docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-firefox:4.0.0-rc-1-prerelease-20210618'
             - docker ps
-            - cd semaphoreci-selenium-lambdatest
             - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=GRID_FIREFOX
       epilogue:
         always:
@@ -53,7 +52,6 @@ blocks:
           commands:
             - 'docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:4.0.0-rc-1-prerelease-20210618'
             - docker ps
-            - cd semaphoreci-selenium-lambdatest
             - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=GRID_CHROME
       epilogue:
         always:
