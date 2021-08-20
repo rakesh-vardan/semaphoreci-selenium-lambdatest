@@ -7,11 +7,11 @@ import org.testng.annotations.Test;
 public class SecondTest extends BaseTest {
 
     @Test
-    public void MyntraTitleTest() {
-        Reporter.log(String.format("Myntra Test Started on thread %s", Thread.currentThread().getId()), true);
+    public void FlipkartTitleTest() {
+        Reporter.log(String.format("Flipkart Test Started on thread %s", Thread.currentThread().getId()), true);
         getDriver().navigate().to("https://www.myntra.com/");
-        Assert.assertEquals(getDriver().getTitle(), "Online Shopping for Women, Men, Kids Fashion & Lifestyle - Myntra");
-        Reporter.log(String.format("Myntra Test Ended on thread %s", Thread.currentThread().getId()), true);
+        Assert.assertEquals(getDriver().getTitle(), "Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!");
+        Reporter.log(String.format("Flipkart Test Ended on thread %s", Thread.currentThread().getId()), true);
     }
 
     @Test
