@@ -1,5 +1,5 @@
 version: v1.0
-name: Complex Pipeline with multiple browsers - parallel
+name: Complex Pipeline with multiple browsers - docker containers
 agent:
   machine:
     type: e1-standard-2
@@ -50,7 +50,9 @@ blocks:
       jobs:
         - name: Run tests in Firefox
           commands:
-            - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_FIREFOX
+            - 'docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-firefox:4.0.0-rc-1-prerelease-20210618'
+            - docker ps
+            - 'mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=GRID_FIREFOX -DgridHubURL=http://localhost:4444/wd/hub'
       epilogue:
         always:
           commands:
@@ -69,7 +71,9 @@ blocks:
       jobs:
         - name: Run tests in Chrome
           commands:
-            - mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=LOCAL_CHROME
+            - 'docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:4.0.0-rc-1-prerelease-20210618'
+            - docker ps
+            - 'mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=GRID_CHROME -DgridHubURL=http://localhost:4444/wd/hub'
       epilogue:
         always:
           commands:
