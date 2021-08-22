@@ -1,5 +1,5 @@
 version: v1.0
-name: Complex Pipeline with multiple browsers - docker containers
+name: Complex Pipeline with multiple browsers - docker-compose
 agent:
   machine:
     type: e1-standard-2
@@ -50,8 +50,9 @@ blocks:
       jobs:
         - name: Run tests in Firefox
           commands:
-            - 'docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-firefox:4.0.0-rc-1-prerelease-20210618'
-            - docker ps
+            - 'curl https://gist.githubusercontent.com/rakesh-vardan/c1dcf6531b826fad91f18c285d566a71/raw/ad90a18fe5e70f2d6aea06621b76d6e0329a4aab/docker-compose-sel.yml > docker-compose.yaml'
+            - docker-compose up -d
+            - docker-compose ps
             - 'mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=GRID_FIREFOX -DgridHubURL=http://localhost:4444/wd/hub'
       epilogue:
         always:
@@ -71,8 +72,6 @@ blocks:
       jobs:
         - name: Run tests in Chrome
           commands:
-            - 'docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:4.0.0-rc-1-prerelease-20210618'
-            - docker ps
             - 'mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=GRID_CHROME -DgridHubURL=http://localhost:4444/wd/hub'
       epilogue:
         always:
