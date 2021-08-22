@@ -36,7 +36,7 @@ blocks:
         always:
           commands:
             - test-results publish target/surefire-reports/junitreports/*.xml
-  - name: Firefox tests
+  - name: Browser tests - Firefox and Chrome
     dependencies:
       - API Smoke tests
     task:
@@ -49,32 +49,13 @@ blocks:
           - cache restore
           - 'curl https://gist.githubusercontent.com/rakesh-vardan/c1dcf6531b826fad91f18c285d566a71/raw/ad90a18fe5e70f2d6aea06621b76d6e0329a4aab/docker-compose-sel.yml > docker-compose.yaml'
           - docker-compose up -d
+          - docker-compose ps
       jobs:
         - name: Run tests in Firefox
           commands:
-            - docker-compose ps
             - 'mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=GRID_FIREFOX -DgridHubURL=http://localhost:4444/wd/hub'
-      epilogue:
-        always:
-          commands:
-            - test-results publish target/surefire-reports/junitreports/*.xml
-  - name: Chrome tests
-    dependencies:
-      - API Smoke tests
-    task:
-      env_vars:
-        - name: MAVEN_OPTS
-          value: '-Dmaven.repo.local=.m2'
-      prologue:
-        commands:
-          - checkout
-          - cache restore
-          - 'curl https://gist.githubusercontent.com/rakesh-vardan/c1dcf6531b826fad91f18c285d566a71/raw/ad90a18fe5e70f2d6aea06621b76d6e0329a4aab/docker-compose-sel.yml > docker-compose.yaml'
-          - docker-compose up -d
-      jobs:
         - name: Run tests in Chrome
           commands:
-            - docker-compose ps
             - 'mvn clean install -DsuiteXmlFile=testng.xml -Dbrowser=GRID_CHROME -DgridHubURL=http://localhost:4444/wd/hub'
       epilogue:
         always:
